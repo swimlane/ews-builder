@@ -1,5 +1,5 @@
 import fire
-from ews_builder import Builder
+from ewsbuilder import Builder
 
 
 def main():

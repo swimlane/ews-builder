@@ -5,7 +5,7 @@ def parse_requirements(requirement_file):
         return f.readlines()
 
 version = dict()
-with open("./ews_builder/utils/version.py") as fp:
+with open("./ewsbuilder/utils/version.py") as fp:
     exec(fp.read(), version)
 
 
@@ -22,14 +22,14 @@ setup(
     url='https://github.com/swimlane/ews-builder',
     author='MSAdministrator',
     author_email='rickardja@live.com',
-    python_requires='>=2.6, !=3.0.*, !=3.1.*, !=3.2.*, <4',
+    python_requires='>=3.6, <4',
     entry_points={
           'console_scripts': [
-              'ews-builder = ews_builder.__main__:main'
+              'ews-builder = ewsbuilder.__main__:main'
           ]
     },
     package_data={
-        'ews-builder':  [
+        'ewsbuilder':  [
             'data/logging.yml'
             'data/messages.xsd',
             'data/services.wsdl',

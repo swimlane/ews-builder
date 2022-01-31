@@ -32,16 +32,17 @@ class Core(metaclass=LoggingBase):
         path = os.path.abspath(os.path.dirname(__file__))
         if not Core.services:
             Core.services = BeautifulSoup(
-            open(os.path.join(path, 'data', 'services.wsdl'), 'rb').read(), 'xml'
+            open(os.path.join(path, 'data', 'against419.wsdl'), 'rb').read(), 'xml'
         )
         if not Core.messages:
-            Core.messages = BeautifulSoup(
-                open(os.path.join(path, 'data', Core.services.find_all('import')[0]['schemaLocation']), 'rb').read(), 'xml'
-            )
-        if not Core.types:
-            Core.types = BeautifulSoup(
-                open(os.path.join(path, 'data', Core.messages.find_all('import')[0]['schemaLocation']), 'rb').read(), 'xml'
-            )
+            if Core.services.find_all('import')[0].get('schemaLocation'):
+                Core.messages = BeautifulSoup(
+                    open(os.path.join(path, 'data', Core.services.find_all('import')[0]['schemaLocation']), 'rb').read(), 'xml'
+                )
+                if not Core.types:
+                    Core.types = BeautifulSoup(
+                        open(os.path.join(path, 'data', Core.messages.find_all('import')[0]['schemaLocation']), 'rb').read(), 'xml'
+                    )
 
     @staticmethod
     def _get_namespace(value):
